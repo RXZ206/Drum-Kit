@@ -8,13 +8,17 @@ for (let i = 0; i < drumButton_length; i++) {
             let buttonInnerHTML = this.innerHTML;
 
             makeSound(buttonInnerHTML);
+
+            buttonAnimation(buttonInnerHTML);
         });
 }
 
 //Keyboard press
 document.addEventListener("keydown", function (event) {
     makeSound(event.key);
-});
+
+    buttonAnimation(event.key);
+}); 
 
 function makeSound(key) {
     switch (key) {
@@ -47,4 +51,15 @@ function makeSound(key) {
             kickBass.play();
             break;
     }
+}
+
+function buttonAnimation(currentKey) {
+
+  let activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+  }, 100);
+
 }
